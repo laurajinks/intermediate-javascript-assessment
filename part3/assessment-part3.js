@@ -12,9 +12,11 @@
 // with the animal as the context, and 'Trogdor' as a parameter.
 // return the result of your updateAnimal invocation
 
-// CODE HERE...
-
-
+const callBinding = (magicAnimals, updateAnimal, id) => {
+    let animal = magicAnimals.find(animal => animal.id === id);
+    updateAnimal.bind(animal);
+    return updateAnimal("Trogdor");
+};
 
 // *************
 // * PROBLEM 2 *
@@ -27,9 +29,11 @@
 // with the context of the animal, and the array ['being majestic', 'eating rainbows'] as a parameter.
 // return the result of your updateAnimal invocation
 
-// CODE HERE...
-
-
+const applyBinding = (magicAnimals, updateAnimal, id) => {
+    let animal = magicAnimals.find(animal => animal.id === id);
+    // updateAnimal.bind(animal);
+    return updateAnimal.apply(animal, ["being majestic", "eating rainbows"]);
+};
 
 // *************
 // * PROBLEM 3 *
@@ -48,8 +52,6 @@
 var foo;
 
 // CODE HERE...
-
-
 
 // *************
 // * PROBLEM 4 *

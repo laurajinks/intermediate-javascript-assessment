@@ -7,34 +7,34 @@
 
 // Given the following nested functions:
 
-function daBears(){
-  var isFurry = true;
+function daBears() {
+    var isFurry = true;
 
-  function papaBear (){
-    var porridge = "Too Hot!";
-    var chair = "Too Big!";
-    var bed = "Too Hard!";
-    var feeling = "Angry";
+    function papaBear() {
+        var porridge = "Too Hot!";
+        var chair = "Too Big!";
+        var bed = "Too Hard!";
+        var feeling = "Angry";
 
-    function mamaBear(){
-      var porridge = "Too Cold!";
-      var bed = "Too Soft!";
+        function mamaBear() {
+            var porridge = "Too Cold!";
+            var bed = "Too Soft!";
 
-      function babyBear(){
-        var porridge = "Just right!";
-        var chair = "Just right!";
-        var bed = "Just right!";
-        var feeling = "Whiny";
-        var sleepy = "Very yes";
-      }
+            function babyBear() {
+                var porridge = "Just right!";
+                var chair = "Just right!";
+                var bed = "Just right!";
+                var feeling = "Whiny";
+                var sleepy = "Very yes";
+            }
+        }
     }
-  }
 
-  function goldilocks(){
-    var feeling = "Hungry";
-    var isFurry = false;
-    var isDinner = true;
-  }
+    function goldilocks() {
+        var feeling = "Hungry";
+        var isFurry = false;
+        var isDinner = true;
+    }
 }
 
 // Remove entries from the following arrays until only correct answers remain.
@@ -43,28 +43,27 @@ function daBears(){
 // Which function(s) access the "chair" variable and get "Too Big!"
 // (Delete wrong answers, leave correct ones)
 
-var fairyTale1 = ["daBears", "papaBear", "mamaBear", "babyBear", "goldilocks"];
+var fairyTale1 = ["papaBear", "mamaBear"];
 
 // Which function(s) access the "feeling" variable and get "Hungry"
 // (Delete wrong answers, leave correct ones)
 
-var fairyTale2 = ["daBears", "papaBear", "mamaBear", "babyBear", "goldilocks"];
+var fairyTale2 = ["goldilocks"];
 
 // Which function(s) access the "porridge" variable and get "Too Cold!"
 // (Delete wrong answers, leave correct ones)
 
-var fairyTale3 = ["daBears", "papaBear", "mamaBear", "babyBear", "goldilocks"];
+var fairyTale3 = ["mamaBear"];
 
 // Which function(s) access the "sleepy" variable and get undefined
 // (Delete wrong answers, leave correct ones)
 
-var fairyTale4 = ["daBears", "papaBear", "mamaBear", "babyBear", "goldilocks"];
+var fairyTale4 = ["daBears", "papaBear", "mamaBear", "goldilocks"];
 
 // Which function(s) access the isFurry variable and get true
 // (Delete wrong answers, leave correct ones)
 
-var fairyTale5 = ["daBears", "papaBear", "mamaBear", "babyBear", "goldilocks"];
-
+var fairyTale5 = ["daBears", "papaBear", "mamaBear", "babyBear"];
 
 // *************
 // * PROBLEM 2 *
@@ -81,18 +80,26 @@ var fairyTale5 = ["daBears", "papaBear", "mamaBear", "babyBear", "goldilocks"];
 // the other called "mustang".  Using implicit context, invoke the drive method on
 // "charger" once, and invoke it twice on "mustang".
 
-// CODE HERE...
+function Vehicle() {
+    this.gasRemaining = 100;
+}
 
+Vehicle.prototype.drive = function() {
+    gasRemaining = this.gasRemaining -= 25;
+};
 
+const charger = new Vehicle();
+const mustang = new Vehicle();
 
-
+charger.drive();
+mustang.drive();
+mustang.drive();
 
 // -----------------------------------------------------------------------------
 
 // *************
 // * PROBLEM 3 *
 // *************
-
 
 // For this problem, you will need to add a method to the String prototype named
 // "grammarPolice".  When called on a string, "grammarPolice" will return a new string
@@ -104,12 +111,19 @@ var fairyTale5 = ["daBears", "papaBear", "mamaBear", "babyBear", "goldilocks"];
 // Your method may be passed punctuation, numbers or other non-letter characters
 // and should neither modify them nor break when encountering them.
 
-
-
-
-// CODE HERE...
-
-
+String.prototype.grammarPolice = function() {
+    var str = this.valueOf();
+    let arr = str.split(" ");
+    const answer = arr.map(word => {
+        let newArr = word.split("");
+        newArr[0] = newArr[0].toUpperCase();
+        for (let i = 1; i < newArr.length; i++) {
+            newArr[i] = newArr[i].toLowerCase();
+        }
+        return (word = newArr.join(""));
+    });
+    return answer.join(" ");
+};
 
 // *************
 // * PROBLEM 4 *
@@ -125,9 +139,15 @@ var fairyTale5 = ["daBears", "papaBear", "mamaBear", "babyBear", "goldilocks"];
 
 // In all other cases, return "Different values"
 
-// CODE HERE...
-
-
+const valueType = (x, y) => {
+    if (x === y) {
+        return "Exactly the same";
+    } else if (x == y) {
+        return "Same value, different types";
+    } else {
+        return "Different values";
+    }
+};
 
 // *************
 // * PROBLEM 5 *
@@ -140,4 +160,6 @@ var fairyTale5 = ["daBears", "papaBear", "mamaBear", "babyBear", "goldilocks"];
 
 var theAnswer = "Unknown";
 
-// CODE HERE...
+const promiseCatcher = promise => {
+    promise.then(response => (theAnswer = response));
+};
