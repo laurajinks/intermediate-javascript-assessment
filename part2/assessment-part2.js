@@ -44,10 +44,10 @@ function noWeakLink() {
     })
         .then(response => {
             firstUser = response.data[0];
-            return response.data;
+            return response;
         })
         .then(response => {
-            thirdUser = res.data[2];
+            thirdUser = response.data[2];
             return response.data[9];
         });
 }
@@ -73,9 +73,12 @@ var elephant = {
     name: "Horton"
 };
 function large() {
+    // console.log(this.name);
     return "My name is " + this.name + " and I am very heavy!";
 }
-var boundToElephant = large.bind(elephant);
+
+const boundToElephant = large.bind(elephant);
+console.log(boundToElephant());
 
 // *************
 // * PROBLEM 3 *
@@ -130,13 +133,15 @@ const accountingOffice = assets => {
 // };
 
 const forgetter = name => {
-    return item => {
-        const remember = [];
+    let array = [];
+    const rememberall = item => {
+        array.push(item);
         return {
             name: name,
-            remember: remember.push(item)
+            remember: array
         };
     };
+    return rememberall;
 };
 
 // *************
@@ -164,25 +169,43 @@ const forgetter = name => {
 // NOTE: Neither hunger nor danger should be able to exceed 100 or drop below 0.
 
 const frodo = (startingHungerValue, startingDangerValue) => {
-    const hunger = startingHungerValue;
-    const danger = startingDangerValue;
+    let hunger = startingHungerValue;
+    let danger = startingDangerValue;
 
-    (dinnerOverFire = () => {
-        hunger -= 25;
-        danger += 40;
+    return {
+        dinnerOverFire: () => {
+            hunger -= 25;
+            danger += 40;
 
-        return {
-            hunger: hunger,
-            danger: danger
-        };
-    }),
-        (hidingInBush = () => {
-            hunger += 35;
-            danger -= 20;
+            if (hunger < 0) {
+                hunger = 0;
+            }
+
+            if (danger > 100) {
+                danger = 100;
+            }
 
             return {
                 hunger: hunger,
                 danger: danger
             };
-        });
+        },
+        hidingInBush: () => {
+            hunger += 35;
+            danger -= 20;
+
+            if (hunger > 100) {
+                hunger = 100;
+            }
+
+            if (danger < 0) {
+                danger = 0;
+            }
+
+            return {
+                hunger: hunger,
+                danger: danger
+            };
+        }
+    };
 };

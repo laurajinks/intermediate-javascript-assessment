@@ -51,7 +51,13 @@ const applyBinding = (magicAnimals, updateAnimal, id) => {
 
 var foo;
 
-// CODE HERE...
+const promiseMe = $q => {
+    return ($q = () => {
+        setTimeout(() => {
+            return (foo = "bar");
+        }, 20);
+    });
+};
 
 // *************
 // * PROBLEM 4 *
@@ -65,4 +71,4 @@ var foo;
 // Make an array of emails (array of strings) from the returned data (You will need to console log or debug to figure this out),
 // and then resolve the array as you complete your promise.
 
-// CODE HERE...
+const emailList = ($q, $http) => {};
